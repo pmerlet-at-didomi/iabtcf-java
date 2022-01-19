@@ -1,6 +1,6 @@
 package com.iabtcf.encoder;
 
-import static com.iabtcf.encoder.utils.TestUtils.toDeci;
+import static com.iabtcf.encoder.utils.TestUtils.toDeciDays;
 import static com.iabtcf.test.utils.IntIterableMatcher.matchInts;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -126,8 +126,8 @@ public class TCStringV2EncoderTest {
 
         assertEquals(1, tcf.split("\\.").length);
         assertEquals(2, decoded.getVersion());
-        assertEquals(toDeci(created), decoded.getCreated());
-        assertEquals(toDeci(updated), decoded.getLastUpdated());
+        assertEquals(toDeciDays(created), decoded.getCreated());
+        assertEquals(toDeciDays(updated), decoded.getLastUpdated());
         assertEquals(1, decoded.getCmpId());
         assertEquals(12, decoded.getCmpVersion());
         assertEquals(1, decoded.getConsentScreen());
@@ -453,7 +453,7 @@ public class TCStringV2EncoderTest {
 
     @Test
     public void testToTCString() {
-        TCString tcStr = TCString.decode("COtybn4PA_zT4KjACBENAPCIAEBAAECAAIAAAAAAAAAA");
+        TCString tcStr = TCString.decode("COtwGEAPA9dwAKjACBENAPCIAEBAAECAAIAAAAAAAAAA");
         TCStringEncoder.Builder b = TCStringEncoder.newBuilder(tcStr);
         TCString tcStr1 = b.toTCString();
         assertEquals(tcStr, tcStr1);

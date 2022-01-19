@@ -265,8 +265,8 @@ public interface TCStringEncoder {
         private String encodeCoreString() {
             BitWriter bitWriter = new BitWriter();
             bitWriter.write(version, CORE_VERSION);
-            bitWriter.write(created, CORE_CREATED);
-            bitWriter.write(updated, CORE_LAST_UPDATED);
+            bitWriter.writeDays(created, CORE_CREATED);
+            bitWriter.writeDays(updated, CORE_LAST_UPDATED);
             bitWriter.write(cmpId, CORE_CMP_ID);
             bitWriter.write(cmpVersion, CORE_CMP_VERSION);
             bitWriter.write(consentScreen, CORE_CONSENT_SCREEN);
@@ -417,11 +417,18 @@ public interface TCStringEncoder {
             return this;
         }
 
+        /**
+         * In V2, the encoded value will be rounded to the day.
+         * It should also be the same value than {@link #lastUpdated}.
+         */
         public Builder created(Instant created) {
             this.created = created;
             return this;
         }
 
+        /**
+         * In V2, the encoded value will be rounded to the day.
+         */
         public Builder lastUpdated(Instant updated) {
             this.updated = updated;
             return this;
